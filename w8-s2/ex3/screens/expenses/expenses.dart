@@ -26,14 +26,39 @@ class _ExpensesState extends State<Expenses> {
       amount: 15.69,
       date: DateTime.now(),
       category: Category.leisure,
+    ), Expense(
+      title: 'Flutter Course',
+      amount: 19.99,
+      date: DateTime.now(),
+      category: Category.travel,
+    ),
+    Expense(
+      title: 'Cinema',
+      amount: 15.69,
+      date: DateTime.now(),
+      category: Category.food,
     ),
   ];
 
 
   void onExpenseRemoved(Expense expense) {
     setState(() {
-      _registeredExpenses.remove(expense);
+      _registeredExpenses.indexOf(expense);
+      setState(() {
+        _registeredExpenses.remove(expense);
+      });
+      
     });
+    //--------SnackBar
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Expense Deleted.'),
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(label: 'Undo', onPressed: () {setState(() {
+          _registeredExpenses.insert(expense as int, expense);
+        });}),
+      ));
   }
 
   void onExpenseCreated(Expense newExpense) {
@@ -65,7 +90,11 @@ class _ExpensesState extends State<Expenses> {
         backgroundColor: Colors.blue[700],
         title: const Text('Ronan-The-Best Expenses App'),
       ),
-      body: ExpensesList(expenses: _registeredExpenses, onExpenseRemoved: onExpenseRemoved,),
+      body: _registeredExpenses.isEmpty
+      ? const Center(
+        child: Text('No expenses found. Start adding some!', style: TextStyle(fontSize: 16),),
+      )
+      : ExpensesList(expenses: _registeredExpenses, onExpenseRemoved: onExpenseRemoved,)
     );
   }
 }

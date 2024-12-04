@@ -28,39 +28,8 @@ class Expense {
   final DateTime date;
   final Category category;
 
-  String get formattedDate {
-    return '${date.month}/${date.day}/${date.year}';
-  }
-
   @override
   String toString() {
-    return "Expense(title: $title, amount: $amount, category: ${category.name}, date: $formattedDate)";
-  }
-}
-
-// A simple example of how you might display the expenses
-
-class ExpenseList extends StatelessWidget {
-  final List<Expense> expenses;
-
-  const ExpenseList({super.key, required this.expenses});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: expenses.length,
-      itemBuilder: (context, index) {
-        final expense = expenses[index];
-        return ListTile(
-          leading: Icon(expense.category.icon),
-          title: Text(expense.title),
-          subtitle: Text('\$${expense.amount.toStringAsFixed(2)} - ${expense.formattedDate}'),
-          trailing: Icon(Icons.delete),
-          onTap: () {
-            // Handle delete or other actions
-          },
-        );
-      },
-    );
+    return "Expense $title , amount $amount";
   }
 }
