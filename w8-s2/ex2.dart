@@ -38,7 +38,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      lastDate: DateTime(2100), 
     );
     if (pickedDate != null && pickedDate != _selectedDate) {
       setState(() {
@@ -102,9 +102,9 @@ class _ExpenseFormState extends State<ExpenseForm> {
             // Date Picker (Text and IconButton)
             Row(
               children: [
-                Text(
+                Text (
                   _selectedDate == null
-                      ? 'No Date Chosen'
+                      ? 'Select Date'
                       : DateFormat('yyyy-MM-dd').format(_selectedDate!),
                   style: const TextStyle(fontSize: 16),
                 ),
